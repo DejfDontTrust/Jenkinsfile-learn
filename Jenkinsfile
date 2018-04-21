@@ -17,14 +17,9 @@ pipeline {
             }
         }
 		stage('Build docker image') {
-            steps {
-                node {
-						checkout scm
-						def customImage = docker.build("my-image:${env.BUILD_ID}")
-						customImage.push()
-
-						customImage.push('latest')
-					}
+            node {
+				def customImage = docker.build("my-image:${env.BUILD_ID}")		
+				}
             }
         }
         stage('Deploy') {
